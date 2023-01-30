@@ -11,6 +11,7 @@
 *.sln.docstates
 bin/*
 Build/CMake/*
+lib/*
 !readme.*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
