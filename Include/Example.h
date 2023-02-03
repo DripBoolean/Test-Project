@@ -4,6 +4,7 @@
 
 std::string msg();
 
+//template classes are superior.
 template <typename T> class Array {
 private:
     T* ptr;
