@@ -20,6 +20,6 @@ void Root::rotate(float angle) {
 }
 
 void Root::accelerate(float scalar) {
-    // Do acceleration
+    velocity *= scalar;
 }
 
