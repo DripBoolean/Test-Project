@@ -3,6 +3,7 @@
 #include "Vec2.h"
 #include "Root.h"
 #include "Circle.h"
+#include "Obstacles.h"
 #include "Screen.h"
 #include "Enemy.h"
 
