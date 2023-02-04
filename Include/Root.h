@@ -1,16 +1,24 @@
 #include <vector>
 #include "Vec2.h"
 
-
-
 class Root {
 private:
     std::vector<Vec2f> points;
     Vec2f velocity;
 
-
+    /**
+     * @brief Construct a new Root object with a given starting point and velocity
+     * 
+     * @param starting_point 
+     * @param starting_velocity 
+     */
     Root(Vec2f starting_point, Vec2f starting_velocity);
 
+    /**
+     * @brief Returns the head of the current Root
+     * 
+     * @return Vec2f Head of the root
+     */
     Vec2f calyptra();
 
     /**

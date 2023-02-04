@@ -105,7 +105,14 @@ T dot(Vec2<T> a, Vec2<T> b)
     return (a.x * b.x) + (a.y * b.y);
 }
 
-
+/**
+ * @brief Returns the distance between 2 points
+ * 
+ * @tparam T 
+ * @param a Point 1
+ * @param b Point 2
+ * @return T Distance between the 2 points
+ */
 template <class T>
 T distance(Vec2<T> a, Vec2<T> b) {
     return (a - b).mag();
