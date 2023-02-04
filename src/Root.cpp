@@ -1,6 +1,31 @@
 #include "Root.h"
 #include <exception>
+#include "Screen.h"
 
+
+float Root::max_y() {
+    float current_max = base().y;
+    for(Vec2<float> point : points) {
+        if(point.y > current_max) current_max = point.y;
+    }
+    return current_max;
+}
+
+float Root::max_x() {
+    float current_max = base().x;
+    for(Vec2<float> point : points) {
+        if(point.x > current_max) current_max = point.x;
+    }
+    return current_max;
+}
+
+float Root::min_x() {
+    float current_min = base().x;
+    for(Vec2<float> point : points) {
+        if(point.x < current_min) current_min = point.x;
+    }
+    return current_min;
+}
 
 Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity) : velocity(starting_velocity) {
     points.push_back(starting_point);
@@ -11,8 +36,12 @@ Vec2<float> Root::calyptra() {
     return points.back();
 }
 
+Vec2<float> Root::base() {
+    if(points.empty()) throw std::length_error("Hey, The List is empty. Thats alright. We all make mistakes sometimes. I know you will do better next time :)");
+    return points[0];
+}
+
 void Root::move() {
-    std::cout << points.size() << std::endl;
     points.push_back(calyptra() + velocity);
 }
 
@@ -33,4 +62,18 @@ void Root::draw(sf::RenderWindow& window) {
         circle.setPosition(point.x, point.y);
         window.draw(circle);
     }
+}
+
+sf::View Root::get_view() {
+    sf::View out;
+
+    float view_height = 2 * max_y();
+
+    view_height += 2 * view_height * DIRT_RATIO;
+
+    out.setCenter(0.f, 0.f);
+
+    out.setSize(view_height, view_height * ASPECT_RATIO);
+
+    return out;
 }

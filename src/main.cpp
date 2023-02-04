@@ -3,10 +3,7 @@
 #include "Vec2.h"
 #include "Root.h"
 #include "Circle.h"
-
-#define SCREEN_WIDTH 1920
-#define SCREEN_HEIGHT 1080
-#define ASPECT_RATIO ((float)SCREEN_HEIGHT / (float)SCREEN_WIDTH)
+#include "Screen.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "I got no roots - Demi Lovato");
@@ -36,7 +33,7 @@ int main() {
         }
 
         mainRoot.move();
-        window.setView(view);
+        window.setView(mainRoot.get_view());
         window.clear();
         mainRoot.draw(window);
         window.display();
