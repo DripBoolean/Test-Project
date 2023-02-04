@@ -4,30 +4,43 @@
 #include "Root.h"
 #include "Circle.h"
 
-int main() {
-	
-    Vec2<float> test(2.0, 1.0);
-    Vec2<float> test2(3.0, 4.0);
-    std::cout << test + test2 << std::endl;
-    Vec2<float> test3 = test;
-    std::cout << test3 << std::endl;
-    std::cout << test3 * 3.0 << std::endl;
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
+#define ASPECT_RATIO ((float)SCREEN_HEIGHT / (float)SCREEN_WIDTH)
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    Circle test_circle(Vec2<float>(100.f, 100.f), 100.f);
+int main() {
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "I got no roots - Demi Lovato");
+
+    sf::View view;
+    view.setCenter(0.f, 10.f);
+    view.setSize(100.f, 100.f * ASPECT_RATIO);
+
+    sf::Clock clock;
+
+    Root mainRoot(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
 
     while (window.isOpen())
-    {
+    {   
+        clock.restart();
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            mainRoot.rotate(-0.03);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            mainRoot.rotate(0.03);
+        }
 
+        mainRoot.move();
+        window.setView(view);
         window.clear();
-        test_circle.draw(window, sf::Color::Green);
+        mainRoot.draw(window);
         window.display();
+        while(clock.getElapsedTime().asSeconds() < 1.0 / 60.0) {}
     }
 
     return 0;

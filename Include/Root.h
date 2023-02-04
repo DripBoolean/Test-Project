@@ -2,12 +2,14 @@
 
 #include <vector>
 #include "Vec2.h"
+#include <SFML/Graphics.hpp>
 
 class Root {
 private:
     std::vector<Vec2<float>> points;
     Vec2<float> velocity;
 
+public:
     /**
      * @brief Construct a new Root object with a given starting point and velocity
      * 
@@ -44,4 +46,11 @@ private:
      * @param scalar Values to scale the velocity by
      */
     void accelerate(float scalar);
+
+    /**
+     * @brief Draws the root
+     * 
+     * @param window Window to render to
+     */
+    void draw(sf::RenderWindow& window);
 };
