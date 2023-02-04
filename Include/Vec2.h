@@ -80,6 +80,12 @@ public:
         return os;
     }
 
+    void rotate(T angle)
+    {
+        x = x * cos(angle) - y * sin(angle);
+        y = x * sin(angle) + y * cos(angle);
+    }
+
 };
 
 template <class T>
