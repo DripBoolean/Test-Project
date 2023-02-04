@@ -105,6 +105,12 @@ T dot(Vec2<T> a, Vec2<T> b)
     return (a.x * b.x) + (a.y * b.y);
 }
 
+
+template <class T>
+T distance(Vec2<T> a, Vec2<T> b) {
+    return (a - b).mag();
+}
+
 // template <class T>
 // inline bool Vec2<T>::operator==(const Vec2<T>& a, const Vec2<T>& b)
 // {
