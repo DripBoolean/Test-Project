@@ -9,6 +9,7 @@ template <typename T> class Array {
 private:
     T* ptr;
     int size;
+    T test;
 
 public:
     Array(T arr[], int s);
