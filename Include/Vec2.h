@@ -88,6 +88,14 @@ public:
 
 };
 
+/**
+ * @brief Returns the dot product of 2 vectors
+ * 
+ * @tparam T 
+ * @param a Vector 1
+ * @param b Vector 2
+ * @return T 
+ */
 template <class T>
 T dot(Vec2<T> a, Vec2<T> b)
 {
