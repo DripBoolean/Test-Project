@@ -3,9 +3,12 @@
 #include <math.h>
 #include <iostream>
 
-//typedef Vec2<float> Vec2f;
-//typedef Vec2<int> Vec2i;
 
+/**
+ * @brief Vector 2 containg 2 type Ts
+ * 
+ * @tparam T Should probably be an int or float, anything else is a bit sus
+ */
 template<class T>
 class Vec2
 {
@@ -89,6 +92,11 @@ public:
         return os;
     }
 
+    /**
+     * @brief Rotates the vector
+     * 
+     * @param angle Angle to rotate by (In Radians)
+     */
     void rotate(T angle)
     {
         float temp_x = x * cos(angle) - y * sin(angle);

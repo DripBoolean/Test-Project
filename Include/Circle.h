@@ -4,9 +4,24 @@
 #include <SFML/Graphics.hpp>
 
 struct Circle {
+    /**
+     * @brief Position of the Circle
+     * 
+     */
     Vec2<float> mPosition;
+
+    /**
+     * @brief Radius of the Circle
+     * 
+     */
     float mRadius;
 
+    /**
+     * @brief Construct a new Circle object
+     * 
+     * @param position Position of the Circle
+     * @param radius Radius of the Circle
+     */
     Circle(Vec2<float> position, float radius) : mPosition(position), mRadius(radius)
         {}
 

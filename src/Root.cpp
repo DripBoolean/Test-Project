@@ -72,6 +72,8 @@ sf::View Root::get_view() {
 
     float view_height = 2 * max_y();
 
+    if(view_height < MIN_SIZE) view_height = MIN_SIZE;
+
     view_height += 2 * (view_height + MARGIN);
 
     out.setSize(view_height, view_height * ASPECT_RATIO);
