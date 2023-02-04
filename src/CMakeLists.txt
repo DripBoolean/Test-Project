@@ -14,5 +14,3 @@ add_executable(main main.cpp Example.cpp)
 include_directories(${CMAKE_SOURCE_DIR}/../Include)
 
 target_link_libraries(main sfml-graphics)
-
-add_subdirectory(test)
