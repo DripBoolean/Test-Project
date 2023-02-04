@@ -29,9 +29,9 @@ private:
 
 
     /**
-     * @brief 
+     * @brief Scales the acceleration by a scalar
      * 
-     * @param scalar 
+     * @param scalar Values to scale the acceleration by
      */
     void accelerate(float scalar);
 };
