@@ -13,6 +13,9 @@ public:
 
     T x = (T)0;
     T y = (T)0;
+
+    Vec2() {}
+
     Vec2(T x, T y): x(x), y(y)
     {
     }
@@ -21,6 +24,7 @@ public:
     {
         x = other.x;
         y = other.y;
+        return *this;
     }
 
     Vec2 operator+(const Vec2<T>& other)
@@ -87,8 +91,9 @@ public:
 
     void rotate(T angle)
     {
-        x = x * cos(angle) - y * sin(angle);
+        float temp_x = x * cos(angle) - y * sin(angle);
         y = x * sin(angle) + y * cos(angle);
+        x = temp_x;
     }
 
 };

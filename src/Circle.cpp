@@ -4,7 +4,7 @@ bool overlaps(Circle a, Circle b) {
     return distance(a.mPosition, b.mPosition) < a.mRadius + b.mRadius;
 }
 
-bool Circle::draw(sf::RenderWindow& window, sf::Color color) {
+void Circle::draw(sf::RenderWindow& window, sf::Color color) {
     sf::CircleShape circ(mRadius);
     circ.setFillColor(color);
     circ.setOrigin(sf::Vector2f(mRadius, mRadius));
@@ -12,4 +12,5 @@ bool Circle::draw(sf::RenderWindow& window, sf::Color color) {
     window.draw(circ);
 }
 
-bool draw(sf::Window& window, sf::Texture texture, sf::IntRect tex_bounds);
+// For when we add textures
+void draw(sf::Window& window, sf::Texture texture, sf::IntRect tex_bounds);

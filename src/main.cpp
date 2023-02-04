@@ -4,17 +4,23 @@
 #include "Root.h"
 #include "Circle.h"
 #include "Screen.h"
+#include "Enemy.h"
+
+#define FPS 60.f
+
+Vec2<float> Enemy::target = Vec2<float>(0.f, -10.f);
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "I got no roots - Demi Lovato");
 
     sf::View view;
-    view.setCenter(0.f, 10.f);
-    view.setSize(100.f, 100.f * ASPECT_RATIO);
-
     sf::Clock clock;
+    sf::Clock total_time;
 
-    Root mainRoot(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
+    Root main_root(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
+
+    
+    std::vector<Enemy> enemies;
 
     while (window.isOpen())
     {   
@@ -26,18 +32,36 @@ int main() {
                 window.close();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            mainRoot.rotate(-0.03);
+            main_root.rotate(-0.03);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            mainRoot.rotate(0.03);
+            main_root.rotate(0.03);
         }
 
-        mainRoot.move();
-        window.setView(mainRoot.get_view());
+        view = main_root.get_view();
+
+        if(total_time.getElapsedTime().asSeconds() > Enemy::spawn_time) {
+            if(rand() % (int)(Enemy::spawn_chance * FPS) == 0) {
+                enemies.push_back(Enemy(view));
+            }
+        }
+
+        for(Enemy& enemy : enemies) {
+            enemy.update();
+        }
+
+        main_root.move();
+        window.setView(view);
         window.clear();
-        mainRoot.draw(window);
+
+        main_root.draw(window);
+
+        for(Enemy& enemy : enemies) {
+            enemy.draw(window);
+        }
+
         window.display();
-        while(clock.getElapsedTime().asSeconds() < 1.0 / 60.0) {}
+        while(clock.getElapsedTime().asSeconds() < 1.0 / FPS) {}
     }
 
     return 0;

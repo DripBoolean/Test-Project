@@ -58,6 +58,7 @@ void Root::draw(sf::RenderWindow& window) {
     circle.setFillColor(sf::Color::Green);
     circle.setRadius(1.f);
     circle.setOrigin(1.f, 1.f);
+
     for(Vec2<float> point : points) {
         circle.setPosition(point.x, point.y);
         window.draw(circle);
@@ -67,11 +68,11 @@ void Root::draw(sf::RenderWindow& window) {
 sf::View Root::get_view() {
     sf::View out;
 
+    out.setCenter(0.f, 0.f);
+
     float view_height = 2 * max_y();
 
-    view_height += 2 * view_height * DIRT_RATIO;
-
-    out.setCenter(0.f, 0.f);
+    view_height += 2 * (view_height + MARGIN);
 
     out.setSize(view_height, view_height * ASPECT_RATIO);
 

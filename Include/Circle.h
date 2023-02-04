@@ -10,9 +10,9 @@ struct Circle {
     Circle(Vec2<float> position, float radius) : mPosition(position), mRadius(radius)
         {}
 
-    bool draw(sf::RenderWindow& window, sf::Color color);
+    void draw(sf::RenderWindow& window, sf::Color color);
 
-    bool draw(sf::Window& window, sf::Texture& texture, sf::IntRect tex_bounds);
+    void draw(sf::Window& window, sf::Texture& texture, sf::IntRect tex_bounds);
 };
 
 /**
