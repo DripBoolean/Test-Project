@@ -5,3 +5,4 @@
 #define ASPECT_RATIO ((float)SCREEN_HEIGHT / (float)SCREEN_WIDTH)
 
 #define MARGIN 20.f
+#define MIN_SIZE 200.f

@@ -4,6 +4,10 @@
 #include "Vec2.h"
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief The Root System of the Bulber Plant!
+ * 
+ */
 class Root {
 private:
     std::vector<Vec2<float>> points;
@@ -65,7 +69,6 @@ public:
      * @param angle Angle amount to rotate by
      */
     void rotate(float angle);
-
 
     /**
      * @brief Scales the velocity by a scalar
