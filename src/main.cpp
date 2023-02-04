@@ -1,6 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Vec2.h"
+#include "Root.h"
+#include "Circle.h"
 
 int main() {
 	
