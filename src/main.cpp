@@ -6,6 +6,7 @@
 #include "Obstacles.h"
 #include "Screen.h"
 #include "Enemy.h"
+#include "Map.h"
 
 #define FPS 60.f
 
@@ -17,6 +18,8 @@ int main() {
     sf::View view;
     sf::Clock clock;
     sf::Clock total_time;
+
+    Map map;
 
     Root main_root(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
 
@@ -54,6 +57,8 @@ int main() {
         main_root.move();
         window.setView(view);
         window.clear();
+        
+        map.draw(window);
 
         main_root.draw(window);
 
