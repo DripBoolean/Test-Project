@@ -6,6 +6,7 @@
 #include "Obstacles.h"
 #include "Screen.h"
 #include "Enemy.h"
+#include <SFML/Audio.hpp>
 
 #define FPS 60.f
 
@@ -17,6 +18,7 @@ int main() {
     sf::View view;
     sf::Clock clock;
     sf::Clock total_time;
+    sf::SoundBuffer buffer;
 
     Root main_root(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
 
@@ -34,6 +36,11 @@ int main() {
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             main_root.rotate(-0.03);
+            if(!buffer.loadFromFile("growing_root.wav"))
+                return -1;
+            sf::Sound sound;
+            sound.setBuffer(buffer);
+            sound.play();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             main_root.rotate(0.03);

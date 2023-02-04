@@ -13,4 +13,4 @@ add_executable(main main.cpp Circle.cpp Root.cpp Obstacles.cpp Enemy.cpp)
 
 include_directories(${CMAKE_SOURCE_DIR}/../Include)
 
-target_link_libraries(main sfml-graphics)
+target_link_libraries(main sfml-graphics sfml-audio)
