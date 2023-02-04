@@ -3,8 +3,8 @@
 
 class Root {
 private:
-    std::vector<Vec2f> points;
-    Vec2f velocity;
+    std::vector<Vec2<float>> points;
+    Vec2<float> velocity;
 
     /**
      * @brief Construct a new Root object with a given starting point and velocity
@@ -12,14 +12,14 @@ private:
      * @param starting_point 
      * @param starting_velocity 
      */
-    Root(Vec2f starting_point, Vec2f starting_velocity);
+    Root(Vec2<float> starting_point, Vec2<float> starting_velocity);
 
     /**
      * @brief Returns the head of the current Root
      * 
-     * @return Vec2f Head of the root
+     * @return Vec2<float> Head of the root
      */
-    Vec2f calyptra();
+    Vec2<float> calyptra();
 
     /**
      * @brief Move the head of the root by its velocity

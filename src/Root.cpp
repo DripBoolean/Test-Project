@@ -1,12 +1,12 @@
-#include "Root.h"
+#include "Root.h"calyptra
 #include <exception>
 
 
-Root::Root(Vec2f starting_point, Vec2f starting_velocity) : velocity(starting_velocity) {
+Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity) : velocity(starting_velocity) {
     points.push_back(starting_point);
 }
 
-Vec2f Root::calyptra() {
+Vec2<float> Root::calyptra() {
     if(points.empty()) throw std::length_error("The List is EMPTY!!! What are you doing???");
     return points.back();
 }
