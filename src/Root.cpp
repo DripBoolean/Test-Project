@@ -16,7 +16,7 @@ void Root::move() {
 }
 
 void Root::rotate(float angle) {
-    // Do Rotations
+    velocity.rotate(angle);
 }
 
 void Root::accelerate(float scalar) {
