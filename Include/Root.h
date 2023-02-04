@@ -1,7 +1,7 @@
 #include <vector>
 #include "Vec2.h"
 
-typedef Vec2<float> Vec2f;
+
 
 class Root {
 private:

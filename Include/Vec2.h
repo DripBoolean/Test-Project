@@ -1,6 +1,9 @@
 #include <math.h>
 #include <iostream>
 
+typedef Vec2<float> Vec2f;
+typedef Vec2<int> Vec2i;
+
 template<class T>
 class Vec2
 {
