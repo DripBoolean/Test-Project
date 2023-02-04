@@ -9,7 +9,7 @@ find_package(SFML 2.5
   COMPONENTS 
     system window graphics network audio REQUIRED)
 
-add_executable(main main.cpp Example.cpp)
+add_executable(main main.cpp Circle.cpp Root.cpp)
 
 include_directories(${CMAKE_SOURCE_DIR}/../Include)
 

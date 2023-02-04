@@ -1,5 +1,4 @@
 #include <iostream>
-#include <Example.h>
 #include <SFML/Graphics.hpp>
 #include "Vec2.h"
 
