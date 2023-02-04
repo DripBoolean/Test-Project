@@ -47,26 +47,26 @@ public:
     {
         x += other.x;
         y += other.y;
-        return this;
+        return *this;
     }
 
     Vec2& operator-=(const Vec2<T>& other)
     {
         x -= other.x;
         y -= other.y;
-        return this;
+        return *this;
     }
 
     Vec2& operator*=(const float scalar)
     {
         x *= scalar, y *= scalar;
-        return this;
+        return *this;
     }
 
     Vec2& operator/=(const float scalar)
     {
         x /= scalar, y /= scalar;
-        return this;
+        return *this;
     }
 
     T mag2()
