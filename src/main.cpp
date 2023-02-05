@@ -63,8 +63,11 @@ int main() {
     
     std::vector<Enemy> enemies;
     std::vector<Projectile> projectiles;
+    bool game_end = false;
 
     while (window.isOpen())
+    {
+    while (!game_end)
     {   
         clock.restart();
         sf::Event event;
@@ -100,7 +103,8 @@ int main() {
 
         for(Enemy& enemy : enemies) {
             if(enemy.reached_target()) {
-                return 0; // Game Over
+                jukebox.play_SFX(assets::PLAYER_DEATH_SFX);
+                game_end = true; // Game Over
             }
             enemy.update();
         }
@@ -141,7 +145,48 @@ int main() {
 
         while(clock.getElapsedTime().asSeconds() < 1.0 / FPS) {}
     }
+    window.clear(sf::Color(255, 150, 50, 255));
+    sf::Font font;
+    if (!font.loadFromFile("assets/arial.TTF"))
+    {
+        throw std::runtime_error("Where da font??");
+    }
+    sf::Text text;
 
-    return 0;
+    // select the font
+    text.setFont(font); // font is a sf::Font
+
+    // set the string to display
+    text.setString("YOU DIED");
+
+    // set the character size
+    text.setCharacterSize(24); // in pixels, not points!
+
+    // set the color
+    text.setFillColor(sf::Color::Red);
+
+    // set the text style
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+    // inside the main loop, between window.clear() and window.display()
+    window.draw(text);
+
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window.close();
+        if (event.type == sf::Event::KeyPressed) {
+            if(event.key.code == sf::Keyboard::Escape) {
+                window.close();
+            }
+        }
+    }
+    window.display();
+
+    
+
 	
+}
+return 0;
 }
