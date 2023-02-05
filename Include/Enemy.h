@@ -35,10 +35,10 @@ private:
 
 public:
     /**
-     * @brief Average chance of an enemy to spawn every second 1 being 100%
+     * @brief Rate that the spawn chance grows per second
      * 
      */
-    constexpr static float spawn_chance = 1.f;
+    constexpr static float spawn_rate_growth = 0.0001f;
 
     /**
      * @brief Delay in seconds before enemys spawn
@@ -73,6 +73,8 @@ public:
     void draw(sf::RenderWindow& window);
 
     bool reached_target();
+
+    static float spawn_rate(float time);
 
     operator Circle() { return Circle(mPosition, size); };
 };

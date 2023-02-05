@@ -94,7 +94,8 @@ int main() {
         view = bulber.get_view();
 
         if(total_time.getElapsedTime().asSeconds() > Enemy::spawn_time) {
-            if(rand() % (int)(Enemy::spawn_chance * FPS) == 0) {
+            std::cout << Enemy::spawn_rate(total_time.getElapsedTime().asSeconds()) << std::endl;
+            if((rand() % 1000) < (int)(Enemy::spawn_rate(total_time.getElapsedTime().asSeconds()) * 1000)) {
                 enemies.push_back(Enemy(view));
                 jukebox.play_SFX(assets::ENEMY_SPAWN_SFX);
             }

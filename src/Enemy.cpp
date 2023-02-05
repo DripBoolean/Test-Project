@@ -34,6 +34,10 @@ void Enemy::draw(sf::RenderWindow& window) {
     window.draw(temp_sprite);
 }
 
+float Enemy::spawn_rate(float time) {
+    return (time - spawn_time) * spawn_rate_growth;
+}
+
 bool Enemy::reached_target() {
     return distance(mPosition, target) < size; 
 }

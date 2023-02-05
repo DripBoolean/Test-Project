@@ -22,7 +22,7 @@ private:
     constexpr static float max_size = 1.5f;
     constexpr static float min_speed = 0.05f;
     constexpr static float max_speed = 0.15f;
-    constexpr static float distance_between_nodes = 1.f;
+    constexpr static float distance_between_nodes = 2.f;
     constexpr static float rotation_rate = 0.03f;
 
     static sf::Texture texture;
