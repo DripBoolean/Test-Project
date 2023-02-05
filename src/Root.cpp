@@ -44,7 +44,15 @@ Vec2<float> Root::perpindicular_vector(unsigned index) {
 Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity, bool rand_rotation) 
     : calyptra(starting_point), velocity(starting_velocity), distance_traveled_before_last_node(0)
     {
-        if(rand_rotation) rotation_multiplier = RandomFloat(-2.f, 2.f);
+        if(rand_rotation) {
+            rotation_multiplier = RandomFloat(-2.f, 2.f);
+            if(rotation_multiplier <= 0.f && rotation_multiplier > -0.5f) {
+                rotation_multiplier = -0.5;
+            }
+            if(rotation_multiplier > 0.f && rotation_multiplier < 0.5f) {
+                rotation_multiplier = 0.5;
+            }
+        }
         else rotation_multiplier = 1.f;
     }
 
