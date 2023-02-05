@@ -3,6 +3,8 @@
 #include "Screen.h"
 #include "Utils.h"
 
+sf::Texture Root::texture = sf::Texture();
+
 float Root::max_y() {
     float current_max = base().y;
     for(Vec2<float> point : points) {
@@ -43,7 +45,11 @@ Vec2<float> Root::perpindicular_vector(unsigned index) {
 
 Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity) 
     : calyptra(starting_point), velocity(starting_velocity), distance_traveled_before_last_node(0)
-    {}
+    {
+        if(!texture.loadFromFile("assets/Rock.png"))
+            throw std::runtime_error("Could not load Root Texture");
+        texture.setRepeated(true);
+    }
 
 
 Vec2<float> Root::base() {
@@ -51,16 +57,29 @@ Vec2<float> Root::base() {
     return points[0];
 }
 
-void Root::move() {
+void Root::move(std::vector<Obstacle>& obsticles) {
+    for(Root& branch : branches) {
+        branch.move(obsticles);
+    }
+    if(!is_alive) return;
+    Vec2<float> new_pos = calyptra + velocity;
+
+    for(Obstacle& obsticle : obsticles) {
+        if(obsticle.collision_check(calyptra, new_pos)) {
+            is_alive = false;
+            std::cout << "Collision at: " << calyptra <<  ", " << new_pos << std::endl;
+            return;
+        }
+    }
+
     calyptra += velocity;
     distance_traveled_before_last_node += velocity.mag();
     if(distance_traveled_before_last_node > distance_between_nodes) {
         distance_traveled_before_last_node = 0.f;
         points.push_back(calyptra);
     }
-    for(Root& branch : branches) {
-        branch.move();
-    }
+    if(calyptra.y < 0.f) is_alive = false;
+    
 }
 
 void Root::rotate_left() {
@@ -82,7 +101,7 @@ void Root::rotate_right() {
 
 void Root::draw(sf::RenderWindow& window) {
     sf::CircleShape circle;
-    circle.setFillColor(sf::Color::Green);
+    circle.setFillColor(sf::Color(0xFFFFFFFF));
 
     for(unsigned i = 0; i < points.size(); i++) {
         circle.setPosition(points[i].x, points[i].y);
@@ -101,7 +120,7 @@ sf::View Root::get_view() {
 
     out.setCenter(0.f, 0.f);
 
-    float view_height = 2 * max_y();
+    float view_height = max_y();
 
     if(view_height < MIN_SIZE) view_height = MIN_SIZE;
 

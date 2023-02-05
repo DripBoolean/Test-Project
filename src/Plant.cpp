@@ -20,7 +20,7 @@ void Plant::rotate_right() {
 }
 
 void Plant::update(Map& map) {
-    main_root.move();
+    main_root.move(map.mObstacles);
     main_root.harvest(map);
 }
 

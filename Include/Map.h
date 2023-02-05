@@ -16,7 +16,7 @@ struct Water {
 
     Water(Vec2<float> position, float size);
 
-    constexpr static float water_drain_rate = 0.05f;
+    constexpr static float water_drain_rate = 0.0005f;
     
     /**
      * @brief Determines if the water object overlaps a Circle
@@ -84,14 +84,14 @@ struct Nitrogen {
 struct Map {
     std::vector<Nitrogen> mNitrogens;
     std::vector<Water> mWaterPockets;
-    std::vector<Obstacles> mObstacles;
+    std::vector<Obstacle> mObstacles;
 
-    constexpr static float default_size = 500.f;
+    constexpr static float default_size = 1000.f;
     constexpr static float nitrogen_rate_per_unit = 0.0003f;
     constexpr static float water_rate_per_unit = 0.0003f;
     constexpr static float water_min_size = 1.f;
     constexpr static float water_max_size = 10.f;
-    constexpr static float obsticle_rate_per_unit = 0.1f;
+    constexpr static float obsticle_rate_per_unit = 0.0003f;
 
     Map();
 

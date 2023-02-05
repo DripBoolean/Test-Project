@@ -16,9 +16,30 @@
 Vec2<float> Enemy::target = Vec2<float>(0.f, -10.f);
 
 int main() {
+    srand(time(0));
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "I got no roots - Demi Lovato");
 
+    sf::Texture dirt_texture;
+    if(!dirt_texture.loadFromFile("assets/Dirt.png")) throw std::runtime_error("bro");
+    dirt_texture.setRepeated(true);
+    
+    sf::Texture sky_texture;
+    if(!sky_texture.loadFromFile("assets/Sky.jpg")) throw std::runtime_error("bro");
+
+    sf::Sprite dirt;
+    dirt.setTexture(dirt_texture);
+    dirt.setTextureRect({0, 0, 10000, 5000});
+    dirt.setScale(0.2f, 0.2f);
+    dirt.setPosition(sf::Vector2f(-1000.f, 0.f));
+
+    sf::RectangleShape sky(sf::Vector2f(100.f, 100.f));
+    sky.setTexture(&sky_texture);
+    sky.setPosition(-100.f / 2.f, -100.f / 2.f);
+
     sf::View view;
+    sf::View background_view;
+    background_view.setSize(100.f, 100.f * ASPECT_RATIO);
+    background_view.setCenter(0.f, 0.f);
     sf::Clock clock;
     sf::Clock total_time;
 
@@ -72,10 +93,15 @@ int main() {
         } 
 
         handle_collision(projectiles, enemies);
-
+        
         bulber.update(map);
+        
+        window.clear(sf::Color(255, 150, 50, 255));
+        window.setView(background_view);
+        window.draw(sky);
+
         window.setView(view);
-        window.clear();
+        window.draw(dirt);
         
         map.draw(window);
 
@@ -90,6 +116,8 @@ int main() {
         }
 
         window.display();
+
+
         while(clock.getElapsedTime().asSeconds() < 1.0 / FPS) {}
     }
 

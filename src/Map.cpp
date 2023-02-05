@@ -36,7 +36,9 @@ void Water::draw(sf::RenderWindow& window) {
     circ.setRadius(size);
     circ.setOrigin(size, size);
     circ.setPosition(position.x, position.y);
-    circ.setFillColor(sf::Color::Blue);
+    circ.setFillColor(sf::Color(55, 100, 255, 255));
+    circ.setOutlineThickness(size * 0.1);
+    circ.setOutlineColor(sf::Color(25, 70, 255, 255));
     window.draw(circ);
 }
 
@@ -63,7 +65,9 @@ Map::Map() {
         if(overlaps_waters((Circle)canidate)) continue;
         mWaterPockets.push_back(canidate);
     }
-    // Add obsticles
+    for(unsigned i = 0; i < num_obsticles; i++) {
+        mObstacles.push_back(Obstacle(rand_point_in_default(), Rock::JAGGED)); // Randomize this
+    }
 }
 
 void Map::draw(sf::RenderWindow& window) {
@@ -72,6 +76,9 @@ void Map::draw(sf::RenderWindow& window) {
     }
     for(Water water : mWaterPockets) {
         water.draw(window);
+    }
+    for(Obstacle obstacle : mObstacles) {
+        obstacle.draw(window);
     }
 }
 
