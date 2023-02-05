@@ -84,7 +84,11 @@ int main() {
             }
         }
 
+
         for(Enemy& enemy : enemies) {
+            if(enemy.reached_target()) {
+                return 0; // Game Over
+            }
             enemy.update();
         }
 
