@@ -17,13 +17,15 @@ private:
     Vec2<float> calyptra;
     Vec2<float> velocity;
     float distance_traveled_before_last_node;
-    bool is_alive;
+    bool is_alive = true;
 
     constexpr static float max_size = 1.5f;
     constexpr static float min_speed = 0.05f;
     constexpr static float max_speed = 0.15f;
     constexpr static float distance_between_nodes = 1.f;
     constexpr static float rotation_rate = 0.03f;
+
+    static sf::Texture texture;
 
     /**
      * @brief Finds the largest y among all points in the Root
@@ -91,7 +93,7 @@ public:
      * @brief Move the head of the root by its velocity
      * 
      */
-    void move();
+    void move(std::vector<Obstacle>& obsticles);
 
     /**
      * @brief Rotates the direction the root is traveling by to one side
