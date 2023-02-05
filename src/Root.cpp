@@ -78,7 +78,6 @@ void Root::draw(sf::RenderWindow& window) {
     circle.setFillColor(sf::Color::Green);
 
     for(unsigned i = 0; i < points.size(); i++) {
-        std::cout << points[i].x << ", " << points[i].y << std::endl;
         circle.setPosition(points[i].x, points[i].y);
         float size = size_at_age(i);
         circle.setRadius(size);
