@@ -74,6 +74,7 @@ int main() {
             if (event.type == sf::Event::KeyPressed) {
                 if(event.key.code == sf::Keyboard::Space) {
                     bulber.shoot_projectile(projectiles);
+                    jukebox.play_SFX(assets::NEEDLE_SHOT_SFX);
                 }
             }
         }
