@@ -28,4 +28,4 @@ struct doth_slain
 };
 
 void handle_collision(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies);
-bool SIMEOONFOOD(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies);
+bool collision_SFX(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies);

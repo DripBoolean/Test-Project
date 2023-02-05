@@ -37,7 +37,7 @@ void handle_collision(std::vector<Projectile>& projectiles, std::vector<Enemy>& 
     }
 }
 
-bool SIMEOONFOOD(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies) {
+bool collision_SFX(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies) {
     for(unsigned proj_index = 0; proj_index < projectiles.size(); proj_index++) {
         bool collided = false;
         for(unsigned enemy_index = 0; enemy_index < enemies.size(); enemy_index++) {
