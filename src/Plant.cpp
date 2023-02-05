@@ -7,7 +7,7 @@ Plant::Plant() :
     main_root(Root(Vec2<float>(0.f, 0), Vec2<float>(0.f, root_starting_speed))),
     water(starting_water)
     {   
-        if(!plant_texture.loadFromFile("assets/Bulber_Test.png")) throw std::runtime_error("Could not open BULBER");
+        if(!plant_texture.loadFromFile("assets/Bulber2ElectricBulberoo.png")) throw std::runtime_error("Could not open BULBER");
     }
 
 void Plant::rotate_left() {
