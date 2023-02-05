@@ -8,7 +8,13 @@ using namespace std;
 
 enum assets {
     MOVING_ROOT_SFX,
+    ROOT_DEATH_SFX,
+    DRINKING_WATER_SFX,
     ENEMY_SPAWN_SFX,
+    ENEMY_DEATH_SFX,
+    NEEDLE_SHOT_SFX,
+    NEEDLE_HIT_SFX,
+    PLAYER_DEATH_SFX,
     ASSETS_LENGTH // always keep as last one
 };
 
@@ -38,7 +44,13 @@ sf::SoundBuffer buffer_array[ASSETS_LENGTH];
  * 
  */
 map<int, string> SFX = {{assets::MOVING_ROOT_SFX, "assets/growing_root.wav",},
+                        {assets::ROOT_DEATH_SFX, "assets/root_death.wav",},
+                        {assets::DRINKING_WATER_SFX, "assets/drinking_water.wav",},
                         {assets::ENEMY_SPAWN_SFX, "assets/enemy_spawn.wav",},
+                        {assets::ENEMY_DEATH_SFX, "assets/enemy_death.wav",},
+                        {assets::NEEDLE_SHOT_SFX, "assets/needle_shot.wav",},
+                        {assets::NEEDLE_HIT_SFX, "assets/needle_hit.wav",},
+                        {assets::PLAYER_DEATH_SFX, "assets/player_death.wav",},
                                                         };
 public:
     /**
@@ -64,4 +76,10 @@ public:
      * @param SFX_selection int (probably enumurated) that represents mapped .wav file
      */
     void play_SFX(int SFX_selection);
+
+    /**
+     * @brief Calls load function for all integers in enum.
+     * 
+     */
+    void load_all();
 };

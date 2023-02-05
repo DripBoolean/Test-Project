@@ -15,7 +15,10 @@ void SFXlib::load(int SFX_selection)
     sf::SoundBuffer new_buffer;
     buffer_array[SFX_selection] = new_buffer;
     if(!buffer_array[SFX_selection].loadFromFile(SFX[SFX_selection]))
-        throw std::runtime_error("Linked file was not found by compiler.");
+    {
+        cout << SFX_selection << endl;
+        throw std::runtime_error("Linked file {SFX_selection} was not found by compiler.");
+    }
 }
 
 void SFXlib::play_SFX(int SFX_selection)
@@ -32,4 +35,12 @@ void SFXlib::play_SFX(int SFX_selection)
     sound.push_back(new_sound);
     sound.back().setBuffer(buffer_array[SFX_selection]);
     sound.back().play();
+}
+
+void SFXlib::load_all()
+{
+    for(int i = 0; i < assets::ASSETS_LENGTH; i++)
+    {
+        load(i);
+    }
 }

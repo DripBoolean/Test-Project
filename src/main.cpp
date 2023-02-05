@@ -23,8 +23,7 @@ int main() {
 
     Map map;
     SFXlib jukebox;
-    //jukebox.load(assets::MOVING_ROOT_SFX);
-    jukebox.load(assets::ENEMY_SPAWN_SFX);
+    jukebox.load_all();
 
     Root main_root(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
 
