@@ -9,6 +9,7 @@
 #include "SFXlib.h"
 #include <SFML/Audio.hpp>
 #include "Map.h"
+#include "Plant.h"
 
 #define FPS 60.f
 
@@ -25,8 +26,7 @@ int main() {
     SFXlib jukebox;
     jukebox.load_all();
 
-    Root main_root(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
-
+    Plant bulber;
     
     std::vector<Enemy> enemies;
 
@@ -40,15 +40,15 @@ int main() {
                 window.close();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            main_root.rotate(-0.03);
+            bulber.rotate_left();
             //jukebox.play_SFX(assets::MOVING_ROOT_SFX);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            main_root.rotate(0.03);
+            bulber.rotate_right();
             //jukebox.play_SFX(assets::MOVING_ROOT_SFX);
         }
 
-        view = main_root.get_view();
+        view = bulber.get_view();
 
         if(total_time.getElapsedTime().asSeconds() > Enemy::spawn_time) {
             if(rand() % (int)(Enemy::spawn_chance * FPS) == 0) {
@@ -61,14 +61,13 @@ int main() {
             enemy.update();
         }
 
-        main_root.move();
-        main_root.harvest(map);
+        bulber.update(map);
         window.setView(view);
         window.clear();
         
         map.draw(window);
 
-        main_root.draw(window);
+        bulber.draw(window);
 
         for(Enemy& enemy : enemies) {
             enemy.draw(window);

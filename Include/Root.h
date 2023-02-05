@@ -23,6 +23,7 @@ private:
     constexpr static float min_speed = 0.05f;
     constexpr static float max_speed = 0.15f;
     constexpr static float distance_between_nodes = 1.f;
+    constexpr static float rotation_rate = 0.03f;
 
     /**
      * @brief Finds the largest y among all points in the Root
@@ -93,11 +94,16 @@ public:
     void move();
 
     /**
-     * @brief Rotates the direction the root is traveling by
+     * @brief Rotates the direction the root is traveling by to one side
      * 
-     * @param angle Angle amount to rotate by
      */
-    void rotate(float angle);
+    void rotate_left();
+
+    /**
+     * @brief Rotates the direction the root is traveling by to one side
+     * 
+     */
+    void rotate_right();
 
     /**
      * @brief Draws the root

@@ -54,7 +54,6 @@ Vec2<float> Root::base() {
 void Root::move() {
     calyptra += velocity;
     distance_traveled_before_last_node += velocity.mag();
-    std::cout << distance_traveled_before_last_node;
     if(distance_traveled_before_last_node > distance_between_nodes) {
         distance_traveled_before_last_node = 0.f;
         points.push_back(calyptra);
@@ -64,11 +63,19 @@ void Root::move() {
     }
 }
 
-void Root::rotate(float angle) {
-    velocity.rotate(angle);
+void Root::rotate_left() {
+    velocity.rotate(-rotation_rate);
 
     for(Root& branch : branches) {
-        branch.rotate(angle);
+        branch.rotate_left();
+    }
+}
+
+void Root::rotate_right() {
+    velocity.rotate(rotation_rate);
+
+    for(Root& branch : branches) {
+        branch.rotate_right();
     }
 }
 
