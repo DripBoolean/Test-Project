@@ -8,6 +8,7 @@ using namespace std;
 
 enum assets {
     MOVING_ROOT_SFX,
+    ENEMY_SPAWN_SFX,
     ASSETS_LENGTH // always keep as last one
 };
 
@@ -37,6 +38,7 @@ sf::SoundBuffer buffer_array[ASSETS_LENGTH];
  * 
  */
 map<int, string> SFX = {{assets::MOVING_ROOT_SFX, "assets/growing_root.wav",},
+                        {assets::ENEMY_SPAWN_SFX, "assets/enemy_spawn.wav",},
                                                         };
 public:
     /**

@@ -23,7 +23,8 @@ int main() {
 
     Map map;
     SFXlib jukebox;
-    jukebox.load(assets::MOVING_ROOT_SFX);
+    //jukebox.load(assets::MOVING_ROOT_SFX);
+    jukebox.load(assets::ENEMY_SPAWN_SFX);
 
     Root main_root(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
 
@@ -41,11 +42,11 @@ int main() {
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             main_root.rotate(-0.03);
-            jukebox.play_SFX(assets::MOVING_ROOT_SFX);
+            //jukebox.play_SFX(assets::MOVING_ROOT_SFX);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             main_root.rotate(0.03);
-            jukebox.play_SFX(assets::MOVING_ROOT_SFX);
+            //jukebox.play_SFX(assets::MOVING_ROOT_SFX);
         }
 
         view = main_root.get_view();
@@ -53,6 +54,7 @@ int main() {
         if(total_time.getElapsedTime().asSeconds() > Enemy::spawn_time) {
             if(rand() % (int)(Enemy::spawn_chance * FPS) == 0) {
                 enemies.push_back(Enemy(view));
+                jukebox.play_SFX(assets::ENEMY_SPAWN_SFX);
             }
         }
 
