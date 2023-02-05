@@ -4,7 +4,8 @@ sf::Texture Plant::plant_texture = sf::Texture();
 
 Plant::Plant() :
     angle(0.f), 
-    main_root(Root(Vec2<float>(0.f, 0), Vec2<float>(0.f, root_starting_speed)))
+    main_root(Root(Vec2<float>(0.f, 0), Vec2<float>(0.f, root_starting_speed))),
+    water(starting_water)
     {   
         if(!plant_texture.loadFromFile("assets/Bulber_Test.png")) throw std::runtime_error("Could not open BULBER");
     }
@@ -21,10 +22,14 @@ void Plant::rotate_right() {
 
 void Plant::update(Map& map) {
     main_root.move(map.mObstacles);
-    main_root.harvest(map);
+    water += main_root.harvest(map);
 }
 
 void Plant::shoot_projectile(std::vector<Projectile>& projectiles) {
+    if(water <  shooting_cost)
+        return;
+
+    water -= shooting_cost;
     projectiles.push_back(Projectile(position, angle));
 }
 

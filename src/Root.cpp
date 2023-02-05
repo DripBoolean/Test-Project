@@ -132,7 +132,7 @@ sf::View Root::get_view() {
 }
 
 float Root::harvest(Map& map) {
-    float water_harvested;
+    float water_harvested = 0.f;
     for(unsigned i = 0; i < points.size(); i++) {
         for(Water& water : map.mWaterPockets) {
             if(water.overlaps(get_circle(i))) {

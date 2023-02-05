@@ -57,7 +57,6 @@ int main() {
     music.setLoopPoints(sf::Music::TimeSpan(sf::seconds(184.0f), sf::seconds(247.0f)));
     music.play();
 
-
     Plant bulber;
     
     std::vector<Enemy> enemies;
