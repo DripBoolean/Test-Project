@@ -83,7 +83,7 @@ void Map::draw(sf::RenderWindow& window) {
 }
 
 Vec2<float> Map::rand_point_in_default() {
-    return Vec2<float>(RandomFloat(-default_size, default_size), RandomFloat(0.f, default_size));
+    return Vec2<float>(RandomFloat(-default_size, default_size), RandomFloat(10.f, default_size));
 }
 
 bool Map::overlaps_nitrogens(Circle testee) {

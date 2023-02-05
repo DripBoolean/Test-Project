@@ -3,8 +3,6 @@
 #include "Screen.h"
 #include "Utils.h"
 
-sf::Texture Root::texture = sf::Texture();
-
 float Root::max_y() {
     float current_max = base().y;
     for(Vec2<float> point : points) {
@@ -30,7 +28,7 @@ float Root::min_x() {
 }
 
 float Root::size_at_age(unsigned index) {
-    return max_size; // Fix This later
+    return (-max_size / (points.size() - index)) + max_size;
 }
 
 Circle Root::get_circle(unsigned index) {
@@ -43,12 +41,11 @@ Vec2<float> Root::perpindicular_vector(unsigned index) {
     return rotated((points[index] - points[index + 1]), M_PI / 2);
 }
 
-Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity) 
+Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity, bool rand_rotation) 
     : calyptra(starting_point), velocity(starting_velocity), distance_traveled_before_last_node(0)
     {
-        if(!texture.loadFromFile("assets/Rock.png"))
-            throw std::runtime_error("Could not load Root Texture");
-        texture.setRepeated(true);
+        if(rand_rotation) rotation_multiplier = RandomFloat(-2.f, 2.f);
+        else rotation_multiplier = 1.f;
     }
 
 
@@ -67,7 +64,6 @@ void Root::move(std::vector<Obstacle>& obsticles) {
     for(Obstacle& obsticle : obsticles) {
         if(obsticle.collision_check(calyptra, new_pos)) {
             is_alive = false;
-            std::cout << "Collision at: " << calyptra <<  ", " << new_pos << std::endl;
             return;
         }
     }
@@ -83,7 +79,7 @@ void Root::move(std::vector<Obstacle>& obsticles) {
 }
 
 void Root::rotate_left() {
-    velocity.rotate(-rotation_rate);
+    velocity.rotate(-rotation_rate * rotation_multiplier);
 
     for(Root& branch : branches) {
         branch.rotate_left();
@@ -91,7 +87,7 @@ void Root::rotate_left() {
 }
 
 void Root::rotate_right() {
-    velocity.rotate(rotation_rate);
+    velocity.rotate(rotation_rate * rotation_multiplier);
 
     for(Root& branch : branches) {
         branch.rotate_right();
@@ -99,10 +95,10 @@ void Root::rotate_right() {
 }
 
 
-void Root::draw(sf::RenderWindow& window) {
+void Root::draw(sf::RenderWindow& window, float water) {
     sf::CircleShape circle;
-    circle.setFillColor(sf::Color(0x41bd91FF));
-
+    int g = 0xbd * (-1 / (water + 1.f) + 1);
+    circle.setFillColor(sf::Color(0x41, g, 0x91, 0xFF));
     for(unsigned i = 0; i < points.size(); i++) {
         circle.setPosition(points[i].x, points[i].y);
         float size = size_at_age(i);
@@ -111,7 +107,7 @@ void Root::draw(sf::RenderWindow& window) {
         window.draw(circle);
     }
     for(Root& branch : branches) {
-        branch.draw(window);
+        branch.draw(window, water);
     }
 }
 
@@ -123,6 +119,8 @@ sf::View Root::get_view() {
     float view_height = max_y();
 
     if(view_height < MIN_SIZE) view_height = MIN_SIZE;
+
+    if(view_height > MAX_SIZE) view_height = MAX_SIZE;
 
     view_height += 2 * (view_height + MARGIN);
 
@@ -156,5 +154,5 @@ void Root::branch() {
     unsigned branch_index = rand() % points.size();
     Vec2<float> branch_location = points[branch_index];
     Vec2<float> branch_velocity = normalized(perpindicular_vector(branch_index)) * RandomFloat(min_speed, max_speed) * ((rand() % 2) ? -1.f : 1.f);
-    branches.push_back(Root(branch_location, branch_velocity));
+    branches.push_back(Root(branch_location, branch_velocity, true));
 }

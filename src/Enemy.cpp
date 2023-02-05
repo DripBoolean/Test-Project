@@ -6,10 +6,14 @@
 
 sf::Texture Enemy::texture = sf::Texture();
 
-Enemy::Enemy(sf::View view) {
-    if(!texture.loadFromFile("assets/Muncher.png")) 
-        throw std::runtime_error("bro");
+bool Enemy::loaded = false;
 
+Enemy::Enemy(sf::View view) {
+    if(!loaded) {
+        if(!texture.loadFromFile("assets/Muncher.png")) 
+            throw std::runtime_error("bro");
+        loaded = true;
+    }
 
     angle = RandomFloat(0, M_PI);
     float corner_distance = Vec2<float>(view.getSize().x, view.getSize().y).mag();

@@ -1,3 +1,5 @@
+// Made by Simon Rhodes, Dustin Simpkins, Chris Ringrose, Alex ...
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Vec2.h"
@@ -94,8 +96,7 @@ int main() {
         view = bulber.get_view();
 
         if(total_time.getElapsedTime().asSeconds() > Enemy::spawn_time) {
-            std::cout << Enemy::spawn_rate(total_time.getElapsedTime().asSeconds()) << std::endl;
-            if((rand() % 1000) < (int)(Enemy::spawn_rate(total_time.getElapsedTime().asSeconds()) * 1000)) {
+            if((rand() % 1000) < ((int)(Enemy::spawn_rate(total_time.getElapsedTime().asSeconds()) * 1000))) {
                 enemies.push_back(Enemy(view));
                 jukebox.play_SFX(assets::ENEMY_SPAWN_SFX);
             }
@@ -105,7 +106,7 @@ int main() {
         for(Enemy& enemy : enemies) {
             if(enemy.reached_target()) {
                 jukebox.play_SFX(assets::PLAYER_DEATH_SFX);
-                game_end = true; // Game Over
+                game_end = true;
             }
             enemy.update();
         }
@@ -184,10 +185,6 @@ int main() {
         }
     }
     window.display();
-
-    
-
-	
-}
+    }
 return 0;
 }

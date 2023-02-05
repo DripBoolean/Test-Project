@@ -17,6 +17,7 @@ private:
     Vec2<float> calyptra;
     Vec2<float> velocity;
     float distance_traveled_before_last_node;
+    float rotation_multiplier;
     bool is_alive = true;
 
     constexpr static float max_size = 1.5f;
@@ -24,8 +25,6 @@ private:
     constexpr static float max_speed = 0.15f;
     constexpr static float distance_between_nodes = 2.f;
     constexpr static float rotation_rate = 0.03f;
-
-    static sf::Texture texture;
 
     /**
      * @brief Finds the largest y among all points in the Root
@@ -80,7 +79,7 @@ public:
      * @param starting_point 
      * @param starting_velocity 
      */
-    Root(Vec2<float> starting_point, Vec2<float> starting_velocity);
+    Root(Vec2<float> starting_point, Vec2<float> starting_velocity, bool rand_rotation = false);
 
     /**
      * @brief Returns the base of the Root
@@ -112,7 +111,7 @@ public:
      * 
      * @param window Window to render to
      */
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window, float water);
 
     /**
      * @brief Get the display view for the root

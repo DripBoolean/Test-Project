@@ -31,6 +31,8 @@ private:
     constexpr static float size = 5.f;
 
     static sf::Texture texture;
+
+    static bool loaded;
     
 
 public:

@@ -6,3 +6,4 @@
 
 #define MARGIN 100.f
 #define MIN_SIZE 100.f
+#define MAX_SIZE 150.f

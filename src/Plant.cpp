@@ -12,11 +12,13 @@ Plant::Plant() :
 
 void Plant::rotate_left() {
     angle -= rotation_rate;
+    if(angle < -M_PI / 2) angle = -M_PI / 2;
     main_root.rotate_left();
 }
 
 void Plant::rotate_right() {
     angle += rotation_rate;
+    if(angle > M_PI / 2) angle = M_PI / 2;
     main_root.rotate_right();
 }
 
@@ -43,7 +45,7 @@ void Plant::draw(sf::RenderWindow& window) {
     temp_sprite.setPosition(position.x, position.y);
     temp_sprite.setTexture(plant_texture);
     temp_sprite.rotate(angle * 180 / M_PI);
-    temp_sprite.setScale(0.2f, 0.2f);
+    temp_sprite.setScale(0.4f, 0.4f);
     window.draw(temp_sprite);
-    main_root.draw(window);
+    main_root.draw(window, water);
 }
