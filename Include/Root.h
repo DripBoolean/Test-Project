@@ -3,6 +3,8 @@
 #include <vector>
 #include "Vec2.h"
 #include <SFML/Graphics.hpp>
+#include "Map.h"
+#include "Circle.h"
 
 /**
  * @brief The Root System of the Bulber Plant!
@@ -11,7 +13,16 @@
 class Root {
 private:
     std::vector<Vec2<float>> points;
+    std::vector<Root> branches;
+    Vec2<float> calyptra;
     Vec2<float> velocity;
+    float distance_traveled_before_last_node;
+    bool is_alive;
+
+    constexpr static float max_size = 1.5f;
+    constexpr static float min_speed = 0.05f;
+    constexpr static float max_speed = 0.15f;
+    constexpr static float distance_between_nodes = 1.f;
 
     /**
      * @brief Finds the largest y among all points in the Root
@@ -34,6 +45,31 @@ private:
      */
     float min_x();
 
+    /**
+     * @brief Gives the size of a node at its index
+     * 
+     * @param index Index this represents the "age" of the node
+     * @return float 
+     */
+    float size_at_age(unsigned index);
+
+    /**
+     * @brief Get a circle for the node at the given index
+     * 
+     * 
+     * @param index index of the node to get a circle object from
+     * @return Circle 
+     */
+    Circle get_circle(unsigned index);
+
+    /**
+     * @brief Gets a vector which points perpindicularly to a point on the root
+     * 
+     * @param index Index of which to get the perp_vector from
+     * @return Vec2<float> 
+     */
+    Vec2<float> perpindicular_vector(unsigned index);
+
 public:
     /**
      * @brief Construct a new Root object with a given starting point and velocity
@@ -42,13 +78,6 @@ public:
      * @param starting_velocity 
      */
     Root(Vec2<float> starting_point, Vec2<float> starting_velocity);
-
-    /**
-     * @brief Returns the head of the Root
-     * 
-     * @return Vec2<float> Head of the Root
-     */
-    Vec2<float> calyptra();
 
     /**
      * @brief Returns the base of the Root
@@ -90,4 +119,17 @@ public:
      * @return sf::View 
      */
     sf::View get_view();
+
+    /**
+     * @brief Harvests resources from the map
+     * 
+     * @param map map to be HARVESTED from
+     */
+    float harvest(Map& map);
+
+    /**
+     * @brief Creates a new branch
+     * 
+     */
+    void branch();
 };

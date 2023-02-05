@@ -1,6 +1,6 @@
 #include "Circle.h"
 
-bool overlaps(Circle a, Circle b) {
+bool overlaping(Circle a, Circle b) {
     return distance(a.mPosition, b.mPosition) < a.mRadius + b.mRadius;
 }
 

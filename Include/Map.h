@@ -4,6 +4,7 @@
 #include "Obstacles.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <Circle.h>
 
 /**
  * @brief Water Pocket that is a key resource for the player
@@ -15,14 +16,16 @@ struct Water {
 
     Water(Vec2<float> position, float size);
 
+    constexpr static float water_drain_rate = 0.05f;
+    
     /**
-     * @brief Determines if the water object oberlaps with another water object
+     * @brief Determines if the water object overlaps a Circle
      * 
-     * @param other Water object to compare to
+     * @param circle Circle to compare to
      * @return true 
      * @return false 
      */
-    bool overlaps(Water other);
+    bool overlaps(Circle circle); 
 
     /**
      * @brief Renders the water to the window
@@ -30,6 +33,15 @@ struct Water {
      * @param window Window to render to
      */
     void draw(sf::RenderWindow& window);
+
+    /**
+     * @brief Harvests the water and returns water retrieved
+     * 
+     * @return float Water harvested
+     */
+    float harvest();
+
+    operator Circle() { return Circle(position, size); };
 };
 
 /**
@@ -38,28 +50,20 @@ struct Water {
  */
 struct Nitrogen {
     Vec2<float> position;
+    bool exists = true;
 
     constexpr static float size = 1.5f;
 
     Nitrogen(Vec2<float> position);
 
     /**
-     * @brief Determines if the Nitrogen object overlaps a Water object
+     * @brief Determines if the water object overlaps a Circle
      * 
-     * @param water Water object to compare to
+     * @param circle Circle to compare to
      * @return true 
      * @return false 
      */
-    bool overlaps(Water water);
-
-    /**
-     * @brief Determines if the Nitrogen object overlaps anoter Nitrogen object
-     * 
-     * @param other Nitrogen object to compare to 
-     * @return true 
-     * @return false 
-     */
-    bool overlaps(Nitrogen other);
+    bool overlaps(Circle circle);
 
     /**
      * @brief Renders the nitrogen to the window
@@ -67,6 +71,10 @@ struct Nitrogen {
      * @param window Window to render to
      */
     void draw(sf::RenderWindow& window);
+
+    void harvest();
+
+    operator Circle() { return Circle(position, size); };
 };
 
 /**
@@ -109,16 +117,7 @@ private:
      * @return true 
      * @return false 
      */
-    bool overlaps_nitrogens(Nitrogen testee);
-
-    /**
-     * @brief Determines if a water overlaps a nitrogen in the map
-     * 
-     * @param testee Water to compare with
-     * @return true 
-     * @return false 
-     */
-    bool overlaps_nitrogens(Water testee);
+    bool overlaps_nitrogens(Circle testee);
 
     /**
      * @brief Determines if water overlaps a water in the map
@@ -127,5 +126,5 @@ private:
      * @return true 
      * @return false 
      */
-    bool overlaps_waters(Water testee);
+    bool overlaps_waters(Circle testee);
 };

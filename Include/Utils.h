@@ -5,6 +5,5 @@
  * @param b Ending value
  * @return float 
  */
-
 float RandomFloat(float a, float b);
 

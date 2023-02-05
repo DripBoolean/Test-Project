@@ -4,15 +4,13 @@
 Nitrogen::Nitrogen(Vec2<float> position) : position(position) 
     {}
 
-bool Nitrogen::overlaps(Water water) {
-    return distance(position, water.position) < water.size + size;
-}
-
-bool Nitrogen::overlaps(Nitrogen other) {
-    return distance(position, other.position) < 2 * size;
+bool Nitrogen::overlaps(Circle circle) {
+    if(!exists) return false;
+    return overlaping(circle, (Circle)(*this));
 }
 
 void Nitrogen::draw(sf::RenderWindow& window) {
+    if(!exists) return;
     sf::CircleShape circ;
     circ.setRadius(size);
     circ.setOrigin(size, size);
@@ -21,11 +19,16 @@ void Nitrogen::draw(sf::RenderWindow& window) {
     window.draw(circ);
 }
 
+void Nitrogen::harvest() {
+    exists = false;
+}
+
 Water::Water(Vec2<float> position, float size) : position(position), size(size)
     {}
 
-bool Water::overlaps(Water other) {
-    return distance(position, other.position) < other.size + size;
+bool Water::overlaps(Circle circle) {
+    if(size < 0.f) return false;
+    return overlaping(circle, (Circle)(*this));
 }
 
 void Water::draw(sf::RenderWindow& window) {
@@ -37,6 +40,11 @@ void Water::draw(sf::RenderWindow& window) {
     window.draw(circ);
 }
 
+float Water::harvest() {
+    size -= water_drain_rate;
+    return water_drain_rate;
+}
+
 Map::Map() {
     float total_units = default_size * default_size * 2;
 
@@ -46,13 +54,13 @@ Map::Map() {
 
     for(unsigned i = 0; i < num_nitrogens; i++) {
         Nitrogen canidate(rand_point_in_default());
-        if(overlaps_nitrogens(canidate)) continue;
+        if(overlaps_nitrogens((Circle)canidate)) continue;
         mNitrogens.push_back(canidate);
     }
     for(unsigned i = 0; i < num_waters; i++) {
         Water canidate(rand_point_in_default(), RandomFloat(water_min_size, water_max_size));
-        if(overlaps_nitrogens(canidate)) continue;
-        if(overlaps_waters(canidate)) continue;
+        if(overlaps_nitrogens((Circle)canidate)) continue;
+        if(overlaps_waters((Circle)canidate)) continue;
         mWaterPockets.push_back(canidate);
     }
     // Add obsticles
@@ -71,21 +79,14 @@ Vec2<float> Map::rand_point_in_default() {
     return Vec2<float>(RandomFloat(-default_size, default_size), RandomFloat(0.f, default_size));
 }
 
-bool Map::overlaps_nitrogens(Nitrogen testee) {
+bool Map::overlaps_nitrogens(Circle testee) {
     for(Nitrogen nitrogen : mNitrogens) {
         if(nitrogen.overlaps(testee)) return true;
     }
     return false;
 }
 
-bool Map::overlaps_nitrogens(Water testee) {
-    for(Nitrogen nitrogen : mNitrogens) {
-        if(nitrogen.overlaps(testee)) return true;
-    }
-    return false;
-}
-
-bool Map::overlaps_waters(Water testee) {
+bool Map::overlaps_waters(Circle testee) {
     for(Water water : mWaterPockets) {
         if(water.overlaps(testee)) return true;
     }
