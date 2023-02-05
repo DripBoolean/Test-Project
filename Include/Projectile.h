@@ -24,4 +24,10 @@ struct Projectile
     operator Circle() { return Circle(position, size); };
 };
 
+struct doth_slain
+{
+    int hath_slain = 0;
+};
+
 void handle_collision(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies);
+bool collision_SFX(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies);

@@ -47,6 +47,8 @@ int main() {
     SFXlib jukebox;
     jukebox.load_all();
 
+    int hath_slain = 0;
+
     //OSTlib vinyl;
     //vinyl.play(music_assets::MAIN_OST, 2, 100, false);
 
@@ -73,6 +75,7 @@ int main() {
             if (event.type == sf::Event::KeyPressed) {
                 if(event.key.code == sf::Keyboard::Space) {
                     bulber.shoot_projectile(projectiles);
+                    jukebox.play_SFX(assets::NEEDLE_SHOT_SFX);
                 }
             }
         }
@@ -106,6 +109,10 @@ int main() {
             projectile.update();
         } 
 
+        if(collision_SFX(projectiles, enemies))
+        {
+            jukebox.play_SFX(assets::ENEMY_DEATH_SFX);
+        }
         handle_collision(projectiles, enemies);
         
         bulber.update(map);
