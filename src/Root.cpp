@@ -41,7 +41,8 @@ Vec2<float> Root::perpindicular_vector(unsigned index) {
     return rotated((points[index] - points[index + 1]), M_PI / 2);
 }
 
-Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity) : calyptra(starting_point), velocity(starting_velocity) 
+Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity) 
+    : calyptra(starting_point), velocity(starting_velocity), distance_traveled_before_last_node(0)
     {}
 
 
@@ -53,6 +54,7 @@ Vec2<float> Root::base() {
 void Root::move() {
     calyptra += velocity;
     distance_traveled_before_last_node += velocity.mag();
+    std::cout << distance_traveled_before_last_node;
     if(distance_traveled_before_last_node > distance_between_nodes) {
         distance_traveled_before_last_node = 0.f;
         points.push_back(calyptra);
@@ -70,15 +72,13 @@ void Root::rotate(float angle) {
     }
 }
 
-void Root::accelerate(float scalar) {
-    velocity *= scalar;
-}
 
 void Root::draw(sf::RenderWindow& window) {
     sf::CircleShape circle;
     circle.setFillColor(sf::Color::Green);
 
     for(unsigned i = 0; i < points.size(); i++) {
+        std::cout << points[i].x << ", " << points[i].y << std::endl;
         circle.setPosition(points[i].x, points[i].y);
         float size = size_at_age(i);
         circle.setRadius(size);
