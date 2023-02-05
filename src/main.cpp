@@ -106,7 +106,7 @@ int main() {
             projectile.update();
         } 
 
-        if(SIMEOONFOOD(projectiles, enemies))
+        if(collision_SFX(projectiles, enemies))
         {
             jukebox.play_SFX(assets::ENEMY_DEATH_SFX);
         }
