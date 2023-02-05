@@ -3,6 +3,8 @@
 #include <vector>
 #include "Vec2.h"
 #include <SFML/Graphics.hpp>
+#include "Map.h"
+#include "Circle.h"
 
 /**
  * @brief The Root System of the Bulber Plant!
@@ -12,6 +14,9 @@ class Root {
 private:
     std::vector<Vec2<float>> points;
     Vec2<float> velocity;
+    bool is_alive;
+
+    constexpr static float max_size = 1.5f;
 
     /**
      * @brief Finds the largest y among all points in the Root
@@ -33,6 +38,23 @@ private:
      * @return float 
      */
     float min_x();
+
+    /**
+     * @brief Gives the size of a node at its index
+     * 
+     * @param index Index this represents the "age" of the node
+     * @return float 
+     */
+    float size_at_age(unsigned index);
+
+    /**
+     * @brief Get a circle for the node at the given index
+     * 
+     * 
+     * @param index index of the node to get a circle object from
+     * @return Circle 
+     */
+    Circle get_circle(unsigned index);
 
 public:
     /**
@@ -90,4 +112,11 @@ public:
      * @return sf::View 
      */
     sf::View get_view();
+
+    /**
+     * @brief Harvests resources from the map
+     * 
+     * @param map map to be HARVESTED from
+     */
+    float harvest(Map& map);
 };

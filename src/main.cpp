@@ -55,6 +55,7 @@ int main() {
         }
 
         main_root.move();
+        main_root.harvest(map);
         window.setView(view);
         window.clear();
         

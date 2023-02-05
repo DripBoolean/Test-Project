@@ -2,7 +2,6 @@
 #include <exception>
 #include "Screen.h"
 
-
 float Root::max_y() {
     float current_max = base().y;
     for(Vec2<float> point : points) {
@@ -25,6 +24,14 @@ float Root::min_x() {
         if(point.x < current_min) current_min = point.x;
     }
     return current_min;
+}
+
+float Root::size_at_age(unsigned index) {
+    return max_size; // Fix This later
+}
+
+Circle Root::get_circle(unsigned index) {
+    return Circle(points[index], size_at_age(index));
 }
 
 Root::Root(Vec2<float> starting_point, Vec2<float> starting_velocity) : velocity(starting_velocity) {
@@ -56,11 +63,12 @@ void Root::accelerate(float scalar) {
 void Root::draw(sf::RenderWindow& window) {
     sf::CircleShape circle;
     circle.setFillColor(sf::Color::Green);
-    circle.setRadius(1.f);
-    circle.setOrigin(1.f, 1.f);
 
-    for(Vec2<float> point : points) {
-        circle.setPosition(point.x, point.y);
+    for(unsigned i = 0; i < points.size(); i++) {
+        circle.setPosition(points[i].x, points[i].y);
+        float size = size_at_age(i);
+        circle.setRadius(size);
+        circle.setOrigin(size, size);
         window.draw(circle);
     }
 }
@@ -79,4 +87,21 @@ sf::View Root::get_view() {
     out.setSize(view_height, view_height * ASPECT_RATIO);
 
     return out;
+}
+
+float Root::harvest(Map& map) {
+    float water_harvested;
+    for(unsigned i = 0; i < points.size(); i++) {
+        for(Water& water : map.mWaterPockets) {
+            if(overlaping(get_circle(i), (Circle)water)) {
+                water_harvested += water.harvest();
+            }
+        }
+        for(Nitrogen& nitrogen : map.mNitrogens) {
+            if(overlaping(get_circle(i), (Circle)nitrogen)) {
+                nitrogen.harvest();
+                // Add Branch
+            }
+        }
+    }
 }

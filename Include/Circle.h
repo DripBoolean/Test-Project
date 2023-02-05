@@ -38,5 +38,5 @@ struct Circle {
  * @return true
  * @return false
  */
-bool overlaps(Circle a, Circle b);
+bool overlaping(Circle a, Circle b);
 
