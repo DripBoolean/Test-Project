@@ -162,5 +162,5 @@ void Root::branch() {
     unsigned branch_index = rand() % points.size();
     Vec2<float> branch_location = points[branch_index];
     Vec2<float> branch_velocity = normalized(perpindicular_vector(branch_index)) * RandomFloat(min_speed, max_speed) * ((rand() % 2) ? -1.f : 1.f);
-    branches.push_back(Root(branch_location, branch_velocity, true));
+    branches.push_back(Root(branch_location, branch_velocity));
 }

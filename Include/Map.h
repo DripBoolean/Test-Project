@@ -86,7 +86,7 @@ struct Map {
     std::vector<Water> mWaterPockets;
     std::vector<Obstacle> mObstacles;
 
-    constexpr static float default_size = 1000.f;
+    constexpr static float default_size = 500.f;
     constexpr static float nitrogen_rate_per_unit = 0.0003f;
     constexpr static float water_rate_per_unit = 0.0003f;
     constexpr static float water_min_size = 1.f;
