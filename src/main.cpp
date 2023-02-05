@@ -10,6 +10,7 @@
 #include <SFML/Audio.hpp>
 #include "Map.h"
 #include "Plant.h"
+//#include "OSTlib.h"
 
 #define FPS 60.f
 
@@ -25,6 +26,15 @@ int main() {
     Map map;
     SFXlib jukebox;
     jukebox.load_all();
+
+    //OSTlib vinyl;
+    //vinyl.play(music_assets::MAIN_OST, 2, 100, false);
+
+    sf::Music music;
+    if (!music.openFromFile("assets/Roots.ogg"))
+        return -1; // error
+    music.play();
+    music.setLoop(false);
 
     Plant bulber;
     
