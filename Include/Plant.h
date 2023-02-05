@@ -2,6 +2,7 @@
 
 #include "Root.h"
 #include "Vec2.h"
+#include "Projectile.h"
 
 struct Plant {
     Root main_root;
@@ -21,7 +22,7 @@ struct Plant {
 
     void update(Map& map);
 
-    void shoot_projectile();
+    void shoot_projectile(std::vector<Projectile>& projectiles);
 
     sf::View get_view();
 

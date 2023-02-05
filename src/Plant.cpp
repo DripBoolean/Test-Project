@@ -10,12 +10,12 @@ Plant::Plant() :
     }
 
 void Plant::rotate_left() {
-    angle += rotation_rate;
+    angle -= rotation_rate;
     main_root.rotate_left();
 }
 
 void Plant::rotate_right() {
-    angle -= rotation_rate;
+    angle += rotation_rate;
     main_root.rotate_right();
 }
 
@@ -24,6 +24,9 @@ void Plant::update(Map& map) {
     main_root.harvest(map);
 }
 
+void Plant::shoot_projectile(std::vector<Projectile>& projectiles) {
+    projectiles.push_back(Projectile(position, angle));
+}
 
 sf::View Plant::get_view() {
     return main_root.get_view();

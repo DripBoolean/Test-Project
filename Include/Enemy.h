@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Vec2.h"
+#include "Circle.h"
 
 /**
  * @brief An Enemy which ATTACKS bulber!!
@@ -66,4 +67,6 @@ public:
      * @param window Window to draw to
      */
     void draw(sf::RenderWindow& window);
+
+    operator Circle() { return Circle(mPosition, size); };
 };

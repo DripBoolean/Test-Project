@@ -29,6 +29,7 @@ int main() {
     Plant bulber;
     
     std::vector<Enemy> enemies;
+    std::vector<Projectile> projectiles;
 
     while (window.isOpen())
     {   
@@ -38,6 +39,11 @@ int main() {
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::KeyPressed) {
+                if(event.key.code == sf::Keyboard::Space) {
+                    bulber.shoot_projectile(projectiles);
+                }
+            }
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             bulber.rotate_left();
@@ -61,6 +67,12 @@ int main() {
             enemy.update();
         }
 
+        for(Projectile& projectile : projectiles) {
+            projectile.update();
+        } 
+
+        handle_collision(projectiles, enemies);
+
         bulber.update(map);
         window.setView(view);
         window.clear();
@@ -71,6 +83,10 @@ int main() {
 
         for(Enemy& enemy : enemies) {
             enemy.draw(window);
+        }
+
+        for(Projectile& projectile : projectiles) {
+            projectile.draw(window);
         }
 
         window.display();
