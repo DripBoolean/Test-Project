@@ -16,6 +16,8 @@ private:
      */
     Vec2<float> mPosition;
 
+    float angle;
+
     /**
      * @brief Speed at which the Enemy moves
      * 
@@ -27,6 +29,8 @@ private:
      * 
      */
     constexpr static float size = 5.f;
+
+    static sf::Texture texture;
     
 
 public:

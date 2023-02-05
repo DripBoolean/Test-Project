@@ -4,8 +4,14 @@
 #include <Vec2.h>
 #include "Utils.h"
 
+sf::Texture Enemy::texture = sf::Texture();
+
 Enemy::Enemy(sf::View view) {
-    float angle = RandomFloat(0, M_PI);
+    if(!texture.loadFromFile("assets/Muncher.png")) 
+        throw std::runtime_error("bro");
+
+
+    angle = RandomFloat(0, M_PI);
     float corner_distance = Vec2<float>(view.getSize().x, view.getSize().y).mag();
     float distance = corner_distance + size;
     mPosition = Vec2<float>(-distance, 0.f);
@@ -18,12 +24,15 @@ void Enemy::update() {
 }
 
 void Enemy::draw(sf::RenderWindow& window) {
-    sf::CircleShape circ;
-    circ.setRadius(size);
-    circ.setOrigin(size, size);
-    circ.setPosition(mPosition.x, mPosition.y);
-    circ.setFillColor(sf::Color(50, 50, 50, 255));
-    window.draw(circ);
+    sf::Sprite temp_sprite;
+    temp_sprite.setTexture(texture);
+    temp_sprite.setTextureRect({0, 0, 32, 32});
+    temp_sprite.setOrigin(sf::Vector2f(16.f, 16.f));
+    temp_sprite.setScale(0.4f, 0.4f);
+    temp_sprite.setPosition(mPosition.x, mPosition.y);
+    std::cout << angle << std::endl;
+    temp_sprite.setRotation((angle * 180 / M_PI) - 90);
+    window.draw(temp_sprite);
 }
 
 bool Enemy::reached_target() {
