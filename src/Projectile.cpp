@@ -1,9 +1,14 @@
 #include "Projectile.h"
 
+sf::Texture Projectile::texture = sf::Texture();
+
 Projectile::Projectile(Vec2<float> position, float angle) 
-    : position(position)
+    : position(position), angle(angle)
 {
+    if(!texture.loadFromFile("assets/Spike.png")) 
+        throw std::runtime_error("bro");
     velocity = rotated(Vec2<float>(0.f, -speed), angle);
+    
 }
 
 bool Projectile::overlaps(Enemy enemy) {
@@ -15,7 +20,14 @@ void Projectile::update() {
 }
 
 void Projectile::draw(sf::RenderWindow& window) {
-    ((Circle)(*this)).draw(window, sf::Color::Red);
+    sf::Sprite temp_sprite;
+    temp_sprite.setTexture(texture);
+    temp_sprite.setTextureRect({0, 0, 32, 32});
+    temp_sprite.setOrigin(sf::Vector2f(16.f, 16.f));
+    temp_sprite.setScale(0.4f, 0.4f);
+    temp_sprite.setPosition(position.x, position.y);
+    temp_sprite.setRotation((angle * 180 / M_PI));
+    window.draw(temp_sprite);
 }
 
 void handle_collision(std::vector<Projectile>& projectiles, std::vector<Enemy>& enemies) {

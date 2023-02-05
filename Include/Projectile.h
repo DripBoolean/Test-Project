@@ -11,6 +11,8 @@ struct Projectile
     constexpr static float speed = 5.f;
     constexpr static float size = 10.f;
 
+    static sf::Texture texture;
+
     Projectile(Vec2<float> position, float angle);
 
     bool overlaps(Enemy enemy);

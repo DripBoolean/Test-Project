@@ -30,7 +30,6 @@ void Enemy::draw(sf::RenderWindow& window) {
     temp_sprite.setOrigin(sf::Vector2f(16.f, 16.f));
     temp_sprite.setScale(0.4f, 0.4f);
     temp_sprite.setPosition(mPosition.x, mPosition.y);
-    std::cout << angle << std::endl;
     temp_sprite.setRotation((angle * 180 / M_PI) - 90);
     window.draw(temp_sprite);
 }
