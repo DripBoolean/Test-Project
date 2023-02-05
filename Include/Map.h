@@ -16,7 +16,7 @@ struct Water {
 
     Water(Vec2<float> position, float size);
 
-    constexpr static float water_drain_rate = 1.f;
+    constexpr static float water_drain_rate = 0.05f;
     
     /**
      * @brief Determines if the water object overlaps a Circle

@@ -104,6 +104,14 @@ public:
         x = temp_x;
     }
 
+    /**
+     * @brief Normalizes the vector
+     * 
+     */
+    void normalize() {
+        (*this) /= mag();
+    }
+
 };
 
 /**
@@ -132,6 +140,34 @@ template <class T>
 T distance(Vec2<T> a, Vec2<T> b) {
     return (a - b).mag();
 }
+
+/**
+ * @brief Return a rotated version of a vector
+ * 
+ * @tparam T 
+ * @param v The vector
+ * @param angle Angle rotated by
+ * @return Vec2<T> 
+ */
+template <class T>
+Vec2<T> rotated(Vec2<T> v, float angle) {
+    v.rotate(angle);
+    return v;
+}
+
+/**
+ * @brief Return a normalized version of a vector
+ * 
+ * @tparam T 
+ * @param v The vector
+ * @return Vec2<T> 
+ */
+template <class T>
+Vec2<T> normalized(Vec2<T> v) {
+    v.normalize();
+    return v;
+}
+
 
 // template <class T>
 // inline bool Vec2<T>::operator==(const Vec2<T>& a, const Vec2<T>& b)
