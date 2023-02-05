@@ -47,6 +47,8 @@ int main() {
     SFXlib jukebox;
     jukebox.load_all();
 
+    int hath_slain = 0;
+
     //OSTlib vinyl;
     //vinyl.play(music_assets::MAIN_OST, 2, 100, false);
 
@@ -104,6 +106,10 @@ int main() {
             projectile.update();
         } 
 
+        if(SIMEOONFOOD(projectiles, enemies))
+        {
+            jukebox.play_SFX(assets::ENEMY_DEATH_SFX);
+        }
         handle_collision(projectiles, enemies);
         
         bulber.update(map);
