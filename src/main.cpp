@@ -6,6 +6,8 @@
 #include "Obstacles.h"
 #include "Screen.h"
 #include "Enemy.h"
+#include "SFXlib.h"
+#include <SFML/Audio.hpp>
 #include "Map.h"
 
 #define FPS 60.f
@@ -20,6 +22,8 @@ int main() {
     sf::Clock total_time;
 
     Map map;
+    SFXlib jukebox;
+    jukebox.load(assets::MOVING_ROOT_SFX);
 
     Root main_root(Vec2<float>(0.f, 0.f), Vec2<float>(0.f, 0.1f));
 
@@ -37,9 +41,11 @@ int main() {
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             main_root.rotate(-0.03);
+            jukebox.play_SFX(assets::MOVING_ROOT_SFX);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             main_root.rotate(0.03);
+            jukebox.play_SFX(assets::MOVING_ROOT_SFX);
         }
 
         view = main_root.get_view();
