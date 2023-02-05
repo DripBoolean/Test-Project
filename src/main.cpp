@@ -32,10 +32,9 @@ int main() {
     dirt.setScale(0.2f, 0.2f);
     dirt.setPosition(sf::Vector2f(-1000.f, 0.f));
 
-    sf::Sprite sky;
-    sky.setTexture(sky_texture);
-    sky.setTextureRect( {-100, -100, 100, (int)(100 * ASPECT_RATIO)} );
-    sky.setPosition(0.f, 0.f);
+    sf::RectangleShape sky(sf::Vector2f(100.f, 100.f));
+    sky.setTexture(&sky_texture);
+    sky.setPosition(-100.f / 2.f, -100.f / 2.f);
 
     sf::View view;
     sf::View background_view;
