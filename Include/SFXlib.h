@@ -11,6 +11,11 @@ enum assets {
     ASSETS_LENGTH // always keep as last one
 };
 
+/**
+ * @brief SFXlib is a  class that stores sound vectors and sound buffer arrays.
+ *        It is able to play multiple sounds at once without cutting other sounds out.
+ * 
+ */
 class SFXlib
 {
 private:
