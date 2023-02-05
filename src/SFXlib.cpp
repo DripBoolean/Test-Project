@@ -20,8 +20,16 @@ void SFXlib::load(int SFX_selection)
 
 void SFXlib::play_SFX(int SFX_selection)
 {
+    for(int i = 0; i < sound.size(); i++)
+    {
+        if(sound[i].getStatus() == 2)
+            continue;
+        sound[i].setBuffer(buffer_array[SFX_selection]);
+        sound[i].play();
+        return;
+    }
     sf::Sound new_sound;
     sound.push_back(new_sound);
-    sound[SFX_selection].setBuffer(buffer_array[SFX_selection]);
-    sound[SFX_selection].play();
+    sound.back().setBuffer(buffer_array[SFX_selection]);
+    sound.back().play();
 }
