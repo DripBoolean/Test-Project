@@ -101,7 +101,7 @@ void Root::rotate_right() {
 
 void Root::draw(sf::RenderWindow& window) {
     sf::CircleShape circle;
-    circle.setFillColor(sf::Color(0xFFFFFFFF));
+    circle.setFillColor(sf::Color(0x41bd91FF));
 
     for(unsigned i = 0; i < points.size(); i++) {
         circle.setPosition(points[i].x, points[i].y);
