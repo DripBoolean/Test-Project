@@ -14,7 +14,7 @@ Enemy::Enemy(sf::View view) {
 }
 
 void Enemy::update() {
-    mPosition -= (mPosition - target) * speed;
+    mPosition += normalized(target - mPosition) * speed;
 }
 
 void Enemy::draw(sf::RenderWindow& window) {
@@ -24,4 +24,8 @@ void Enemy::draw(sf::RenderWindow& window) {
     circ.setPosition(mPosition.x, mPosition.y);
     circ.setFillColor(sf::Color(50, 50, 50, 255));
     window.draw(circ);
+}
+
+bool Enemy::reached_target() {
+    return distance(mPosition, target) < size; 
 }

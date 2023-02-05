@@ -20,10 +20,10 @@ private:
      * @brief Speed at which the Enemy moves
      * 
      */
-    constexpr static float speed = 0.01f;
+    constexpr static float speed = 1.f;
 
     /**
-     * @brief Size of the Enemy
+     * @brief Size of the Enemy 
      * 
      */
     constexpr static float size = 5.f;
@@ -67,6 +67,8 @@ public:
      * @param window Window to draw to
      */
     void draw(sf::RenderWindow& window);
+
+    bool reached_target();
 
     operator Circle() { return Circle(mPosition, size); };
 };
