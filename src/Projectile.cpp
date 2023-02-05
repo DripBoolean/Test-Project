@@ -1,4 +1,5 @@
 #include "Projectile.h"
+#include "SFXlib.h"
 
 Projectile::Projectile(Vec2<float> position, float angle) 
     : position(position)
