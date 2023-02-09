@@ -84,11 +84,11 @@ bool in_segment(Vec2<float> q, Vec2<float> p, Vec2<float> r)
 int orientation(Vec2<float> q, Vec2<float> p, Vec2<float> r)
 {
     int value = (q.y - p.y) * (r.x - q.x) -
-              (q.x - p.x) * (r.y - q.y);
+              (q.x - p.x) * (r.y - q.y);  //dot product, if value 0 -- perpendicualr, >0 acute angle, <0 obtuse angle. Maybe flip y axis (p.y - q.y)
   
     if (value == 0) return 0;  // collinear
   
-    return (value > 0)? 1: 2; // clockwise or counterclockwise
+    return (value > 0)? 1: 2; // clockwise or counterclockwise (acute or obtuse)
 }
 
 bool is_intersecting(Vec2<float> p1, Vec2<float> q1, Vec2<float> p2, Vec2<float> q2)
